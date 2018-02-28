@@ -15,14 +15,14 @@ Pod::Spec.new do |s|
   #  summary should be tweet-length, and the description more in depth.
   #
 
-  s.name         = "tealplcrashreporter"
+  s.name         = "TealiumCrashReporter"
   s.version      = "1.3.0"
   s.summary      = "Fork of the Plausible Labs PLCrashReporter repo."
   s.description  = "This fork contains code that is not part of the core PLCrashReporter distribution.  This software is not provided by or maintained by Plausible Labs."
 
   s.homepage     = "https://github.com/Tealium/plcrashreporter" 
   s.platform = :ios, "8.0"
-  s.license      = { :type => "MIT" }
+  s.license      = { :type => "MIT", :file => "LICENSE" }
   s.author             = { "Jonathan Wong" => "jonathan.wong@tealium.com" }
 
   # todo: update url when merging to master
