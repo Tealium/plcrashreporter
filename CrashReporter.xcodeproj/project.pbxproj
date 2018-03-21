@@ -976,7 +976,7 @@
 		4BD4D9832046185D005C3045 /* PLCrashAsyncAllocator.h in Headers */ = {isa = PBXBuildFile; fileRef = 0576DAB01B41CCE0000BCA73 /* PLCrashAsyncAllocator.h */; };
 		4BD4D984204618D4005C3045 /* PLCrashMachExceptionServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 0573B42A1681098E00395F2A /* PLCrashMachExceptionServer.h */; };
 		4BD4D986204619C1005C3045 /* PLCrashReportFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 054627B811D99D06007891C7 /* PLCrashReportFormatter.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4BD4D98B20462F1A005C3045 /* TealiumCrashReporteriOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 4BD4D98A20462F1A005C3045 /* TealiumCrashReporteriOS.h */; };
+		4BD4D98B20462F1A005C3045 /* TealiumCrashReporteriOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 4BD4D98A20462F1A005C3045 /* TealiumCrashReporteriOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C21688F916445344000F90ED /* PLCrashAsyncMachOStringTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C21688F816445344000F90ED /* PLCrashAsyncMachOStringTests.m */; };
 		C21688FA16445344000F90ED /* PLCrashAsyncMachOStringTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C21688F816445344000F90ED /* PLCrashAsyncMachOStringTests.m */; };
 		C21688FB16445344000F90ED /* PLCrashAsyncMachOStringTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C21688F816445344000F90ED /* PLCrashAsyncMachOStringTests.m */; };
@@ -2682,6 +2682,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4BD4D98B20462F1A005C3045 /* TealiumCrashReporteriOS.h in Headers */,
 				4BD4D8F820460770005C3045 /* CrashReporter.h in Headers */,
 				4BD4D90820460770005C3045 /* PLCrashAsyncSignalInfo.h in Headers */,
 				4BD4D90C20460770005C3045 /* PLCrashFeatureConfig.h in Headers */,
@@ -2736,7 +2737,6 @@
 				4BD4D96B20461649005C3045 /* PLCrashMachExceptionPort.h in Headers */,
 				4BD4D96C20461649005C3045 /* PLCrashMachExceptionPortSet.h in Headers */,
 				4BD4D96A2046162A005C3045 /* PLCrashAsyncLinkedList.hpp in Headers */,
-				4BD4D98B20462F1A005C3045 /* TealiumCrashReporteriOS.h in Headers */,
 				4BD4D9692046160B005C3045 /* shared_ptr.hpp in Headers */,
 				4BD4D968204615FD005C3045 /* PLCrashUncaughtExceptionHandler.h in Headers */,
 			);
