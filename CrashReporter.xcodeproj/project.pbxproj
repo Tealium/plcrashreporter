@@ -6258,7 +6258,7 @@
 				SKIP_INSTALL = NO;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALID_ARCHS = "i386 armv6 x86_64 arm64 arm64e";
+				VALID_ARCHS = "i386 armv6 x86_64 arm64 arm64e arm7 arm7s";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -6311,7 +6311,7 @@
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
-				VALID_ARCHS = "i386 armv6 x86_64 arm64 arm64e";
+				VALID_ARCHS = "i386 armv6 x86_64 arm64 arm64e arm7 arm7s";
 				VERSIONING_SYSTEM = "apple-generic";
 				ZERO_LINK = NO;
 			};
