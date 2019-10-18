@@ -1863,7 +1863,7 @@
 		057CD98516CD5D5C0067E670 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		0581B520168FDB280098C103 /* mach_exc.defs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.mig; name = mach_exc.defs; path = usr/include/mach/mach_exc.defs; sourceTree = SDKROOT; };
 		058484AD1804841100A56049 /* unwind_test_arm64_frameless.S */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = unwind_test_arm64_frameless.S; sourceTree = "<group>"; };
-		058812B91040582D009128FB /* CrashReporteriOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CrashReporteriOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		058812B91040582D009128FB /* CrashReporter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CrashReporter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		05920D1C1774E218001E8975 /* dwarf_private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dwarf_private.h; sourceTree = "<group>"; };
 		05920D1E177B9257001E8975 /* PLCrashFrameDWARFUnwind.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PLCrashFrameDWARFUnwind.cpp; sourceTree = "<group>"; };
 		05920D1F177B9257001E8975 /* PLCrashFrameDWARFUnwind.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLCrashFrameDWARFUnwind.h; sourceTree = "<group>"; };
@@ -2246,7 +2246,7 @@
 				05E731E30EFA1A3E005EDFB7 /* plcrashutil */,
 				05E731F30EFA1AAB005EDFB7 /* libCrashReporter-MacOSX-Static.a */,
 				050DE24D0F61B80B00152ED3 /* Fuzz Testing */,
-				058812B91040582D009128FB /* CrashReporteriOS.framework */,
+				058812B91040582D009128FB /* CrashReporter.framework */,
 				052A45CF136353FB00987004 /* DemoCrash-iOS-Device.app */,
 				052A464F136355FD00987004 /* DemoCrash-iOS-Simulator.app */,
 				8064D81B1C4D22D8005A8B4C /* libCrashReporter-appletvos.a */,
@@ -3523,7 +3523,7 @@
 			);
 			name = CrashReporteriOS;
 			productName = "PLCrashReporter-iPhone";
-			productReference = 058812B91040582D009128FB /* CrashReporteriOS.framework */;
+			productReference = 058812B91040582D009128FB /* CrashReporter.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		05CD31510EE936A9000FDE88 /* CrashReporter-iOS-Device */ = {
@@ -4086,7 +4086,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "FRAMEWORK=\"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework\"\n\n#\"${SRCROOT}/build/${CONFIGURATION}-iphoneos/libCrashReporter-iphoneos.a\"\n#\nlipo \\\n\"${BUILD_DIR}/${CONFIGURATION}-iphoneos/libCrashReporter-iphoneos.a\" \\\n\"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/libCrashReporter-iPhoneSimulator.a\" \\\n-create -output \"${FRAMEWORK}/Versions/Current/${PRODUCT_NAME}\"\n\n# Strip debugging symbols\n#strip -S \"${FRAMEWORK}/Versions/Current/${PRODUCT_NAME}\"\n\n# Create a Bitcode backward compatible binary with older Xcode versions but still support architectures from newer Xcode versions\nif [ -z \"$PL_ARM64E_XCODE_PATH\" ]; then\necho \"Path to Xcode version supporting arm64e not provided; Bitcode compatibility and device architectures are limited to the running Xcode version.\"\nelse\n\nLIB_IPHONEOS_TEMP=\"${BUILD_DIR}/${CONFIGURATION}-iphoneos/libCrashReporter-iphoneos.a\"\nLIB_IPHONEOS_FINAL=\"${FRAMEWORK}/Versions/Current/${PRODUCT_NAME}\"\n\n# Build with the Xcode version supporting arm64e\nenv DEVELOPER_DIR=\"$PL_ARM64E_XCODE_PATH\" /usr/bin/xcodebuild ARCHS=\"arm64e\" -configuration Release -target 'CrashReporter-iOS-Device'\n\n# Concatenate the architectures built from Xcode versions \nenv DEVELOPER_DIR=\"$PL_ARM64E_XCODE_PATH\" /usr/bin/lipo ${LIB_IPHONEOS_FINAL} ${LIB_IPHONEOS_TEMP} -create -output ${LIB_IPHONEOS_FINAL}\nfi\n\ncd \"${FRAMEWORK}\" && ln -sf \"Versions/Current/${PRODUCT_NAME}\" ./\n";
+			shellScript = "FRAMEWORK=\"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework\"\n\nlipo \\\n\"${BUILD_DIR}/${CONFIGURATION}-iphoneos/libCrashReporter-iPhoneOS.a\" \\\n\"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/libCrashReporter-iPhoneSimulator.a\" \\\n-create -output \"${FRAMEWORK}/Versions/Current/${PRODUCT_NAME}\"\n\n# Strip debugging symbols\n#strip -S \"${FRAMEWORK}/Versions/Current/${PRODUCT_NAME}\"\n\n# Create a Bitcode backward compatible binary with older Xcode versions but still support architectures from newer Xcode versions\nif [ -z \"$PL_ARM64E_XCODE_PATH\" ]; then\necho \"Path to Xcode version supporting arm64e not provided; Bitcode compatibility and device architectures are limited to the running Xcode version.\"\nelse\nLIB_IPHONEOS_TEMP=\"${BUILD_DIR}/${CONFIGURATION}-iphoneos/libCrashReporter-iPhoneOS.a\"\nLIB_IPHONEOS_FINAL=\"${FRAMEWORK}/Versions/Current/${PRODUCT_NAME}\"\n\n# Build with the Xcode version supporting arm64e\nenv DEVELOPER_DIR=\"$PL_ARM64E_XCODE_PATH\" /usr/bin/xcodebuild ARCHS=\"arm64e\" -configuration Release -target 'CrashReporter-iOS-Device'\n\n# Concatenate the architectures built from Xcode versions \nenv DEVELOPER_DIR=\"$PL_ARM64E_XCODE_PATH\" /usr/bin/lipo ${LIB_IPHONEOS_FINAL} ${LIB_IPHONEOS_TEMP} -create -output ${LIB_IPHONEOS_FINAL}\nfi\n\ncd \"${FRAMEWORK}\" && ln -sf \"Versions/Current/${PRODUCT_NAME}\" ./\n";
 		};
 		058812D310405908009128FB /* Create Disk Image */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -5535,62 +5535,50 @@
 		058812BC1040582E009128FB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ADDITIONAL_SDKS = iphoneos;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = dwarf;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
-				EFFECTIVE_PLATFORM_NAME = "-iphoneos";
+				EFFECTIVE_PLATFORM_NAME = "-iphone";
 				FRAMEWORK_VERSION = A;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = Resources/Info.plist;
 				INSTALL_PATH = "$(HOME)/Library/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-framework",
 					Foundation,
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "coop.plausible.${PRODUCT_NAME:identifier}";
-				PRODUCT_NAME = CrashReporteriOS;
-				SDKROOT = iphoneos;
+				PRODUCT_NAME = CrashReporter;
 				SKIP_INSTALL = YES;
-				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALID_ARCHS = "armv7 armv7s arm64 arm64e";
 			};
 			name = Debug;
 		};
 		058812BD1040582E009128FB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ADDITIONAL_SDKS = iphoneos;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
-				DEBUG_INFORMATION_FORMAT = dwarf;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
-				EFFECTIVE_PLATFORM_NAME = "-iphoneos";
+				EFFECTIVE_PLATFORM_NAME = "-iphone";
 				FRAMEWORK_VERSION = A;
 				GCC_MODEL_TUNING = G5;
 				INFOPLIST_FILE = Resources/Info.plist;
 				INSTALL_PATH = "$(HOME)/Library/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-framework",
 					Foundation,
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "coop.plausible.${PRODUCT_NAME:identifier}";
-				PRODUCT_NAME = CrashReporteriOS;
-				SDKROOT = iphoneos;
+				PRODUCT_NAME = CrashReporter;
 				SKIP_INSTALL = YES;
-				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALID_ARCHS = "armv7 armv7s arm64 arm64e";
 				ZERO_LINK = NO;
 			};
 			name = Release;
